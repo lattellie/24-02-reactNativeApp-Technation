@@ -2,8 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Task from './components/Tasks'
 import React, {useState} from 'react';
+import DropDownPicker from 'react-native-dropdown-picker';
 
-export default function App() {
+function App() {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
   const handleAddTask = () => {
@@ -13,6 +14,12 @@ export default function App() {
     // puts out everything in this task as a new array and add new task to it
     setTask(null);
   }
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Monday', value: 'Monday'},
+    {label: 'B', value: 'banana'}
+  ]);
 
   const completeTask = (index) => {
     let itemsCopy = [...taskItems];
@@ -46,12 +53,25 @@ export default function App() {
         behavior={Platform.OS ==='ios'? 'padding':'height'}
         style={styles.writeTaskWrapper}
       >
-        <TextInput 
-          style = {styles.input} 
-          placeholder={'Write a task'} 
-          value = {task}
-          onChangeText={text =>setTask(text)}
-        ></TextInput>
+        <View style = {styles.textInputs}>
+          <TextInput 
+            style = {styles.input} 
+            placeholder={'Write a task'} 
+            value = {task}
+            onChangeText={text =>setTask(text)}
+          ></TextInput>
+          <View style = {styles.dropdown}>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            onChangeValue={value => console.log(value)}
+          />
+          </View>
+        </View>
         <TouchableOpacity onPress={()=>handleAddTask()}>
           <View style = {styles.addWraper}>
             <Text style = {styles.addText}>+</Text>
@@ -62,11 +82,18 @@ export default function App() {
     </View>
   );
 }
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#e8eaed',
+  },
+  textInputs:{
+    width: '70%'
+  },
+  dropdown:{
+    paddingVertical: 10
   },
   tasksWrapper: {
     paddingTop: 80,
