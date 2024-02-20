@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, PermissionsAndroid} from 'reac
 const Checkbox = (props) => {
     return (
         <View style = {styles.item}>
-            <View style = {[styles.itemLeft]}>
+            <View style = {styles.itemLeft}>
                 <View style = {[styles.square, props.selected ==1 ? styles.itemSelected : null]}></View>
                 <Text style = {styles.itemText}>{props.text}</Text>
             </View>

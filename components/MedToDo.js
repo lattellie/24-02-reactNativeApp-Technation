@@ -1,35 +1,40 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, PermissionsAndroid} from 'react-native';
 const MedToDo = (props) => {
+
+
+    
+    // name: 'Medicine D',
+    // often: [0,0,1],
+    // exp: [2024,3,19],
+    // description: 'this is the description for medicine D.',
+    // selected: -1,
     return (
         <View style = {styles.item}>
-            <View style = {[styles.itemLeft]}>
-                <View style = {[styles.square, props.selected ==1 ? styles.itemSelected : null]}></View>
-                <Text style = {styles.itemText}>{props.text}</Text>
-            </View>
-            <View style = {styles.circular}></View>
+            <TouchableOpacity 
+                style = {[styles.square, props.selected ==1 ? styles.itemSelected : null]}
+                onpress = {()=>checkItem()}
+            >
+            </TouchableOpacity>
+            <TouchableOpacity 
+                style = {styles.textInstruction} 
+                onPress={()=>expandInstruction()}
+            >
+                <Text>{props.med.name}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     item:{
+        padding: 4,
         backgroundColor:'#fff',
-        padding: 5,
         borderRadius: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 20,
         width: '100%',
-    },
-    itemSelected:{
-        backgroundColor: '#000',
-    },
-    itemLeft:{
-        flexDirection: 'row',
-        alignItems: 'center',
-        flexWrap: 'wrap'
     },
     square:{
         width: 24,
@@ -39,16 +44,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginRight: 15,
     },
-    itemText:{
-        maxWidth: '80%',
-
+    itemSelected:{
+        backgroundColor: '#000',
     },
-    circular:{
-        width: 12,
-        height: 12,
-        borderColor: '#55bcf6',
-        borderWidth: 2,
-        borderRadius: 5,
+    textInstruction:{
+        width: '90%',
     },
 });
 export default MedToDo;
