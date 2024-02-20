@@ -34,11 +34,12 @@ const App = () => {
     description: 'this is the description for medicine D.',
     selected: -1,
   }
+  const timeFrameList = ['morning','lunch','evening'];
   const [medList, setMedList] = useState([med1, med2, med3, med4]);
   const userName = 'John';
   const changeselect = (index) => {
     let medCopy = [...medList];
-    console.log(medCopy[index]);
+    // console.log(medCopy[index]);
     medCopy[index] = { ... medCopy[index],selected:-medCopy[index].selected};
     setMedList(medCopy);
   }
@@ -81,11 +82,44 @@ const App = () => {
         onPress={() => setModalVisible(true)}>
         <Text style={styles.textStyle}>Preference Setting</Text>
       </Pressable>
+      <View style={styles.todoFrame}>
+        {
+            timeFrameList.map((item,index) => {
+                return(
+                    <View style={styles.timeFrame}>
+                        <Text style={styles.timeCaption}>{item}</Text>
+                        {
+                            medList.map((med, medIdx) => {
+                                if (med.selected == 1 & med.often[index]==1){
+                                    return(
+                                        <Text>{med.name}</Text>
+                                    )
+                                }
+                            })
+                        }
+                    </View>
+                )
+            }
+
+            )
+        }
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+    todoFrame:{
+        marginVertical: 20,
+        width: '80%',
+    },
+    timeFrame:{
+
+    },
+    timeCaption:{
+        fontSize: 20,
+        textAlign: 'center',
+    },
     items:{
         padding: 0,
         margin: 0,
