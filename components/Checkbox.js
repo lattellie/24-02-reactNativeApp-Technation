@@ -4,7 +4,7 @@ const Checkbox = (props) => {
     return (
         <View style = {styles.item}>
             <View style = {styles.itemLeft}>
-                <View style = {[styles.square, props.selected ==1 ? styles.itemSelected : null]}></View>
+                <View style = {[styles.square, props.selected ==1 ? styles.itemSelected:null]}></View>
                 <Text style = {styles.itemText}>{props.text}</Text>
             </View>
             <View style = {styles.circular}></View>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     square:{
         width: 24,
         height: 24,
-        backgroundColor: '#55bcf6',
+        backgroundColor: '#e0e0e0',
         opacity: 0.4,
         borderRadius: 5,
         marginRight: 15,

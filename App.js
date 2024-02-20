@@ -4,8 +4,8 @@ import Checkbox from './components/Checkbox';
 import MedToDo from './components/MedToDo';
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [medModVisible, setMedModVisible] = useState(false);
-
+  const [displayInstruction, setDisplayInstruction] = useState('');
+  const [medModalVisible, setMedModalVisible] = useState(false);
   // setting up all the medicines in the list
   const med1 = {
     name: 'Medicine A',
@@ -93,24 +93,25 @@ const App = () => {
           </View>
         </Modal>)
   };
-
-  const getMedModal = (inputText) => {
+  const getMedModal = () => {
     return (
         <Modal
-          animationType="fade"
-          transparent={true}
-          visible={medModVisible}
-          onRequestClose={() => {
+            animationType="fade"
+            transparent={true}
+            visible={medModalVisible}
+            onRequestClose={() => {
             Alert.alert('Modal has been closed.');
-            setMedModVisible(!medModVisible);
-          }}>
-          <View style={styles.centeredView}>
-              <Text style={styles.modalText}>{inputText}</Text>
-              <Pressable
+            setMedModalVisible(!medModalVisible);
+            }}>
+            <View style={styles.centeredView}>
+            <View style={styles.medDescription}>
+                <Text style={styles.textDescription}>{displayInstruction}</Text>
+                <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => setMedModVisible(!medModVisible)}>
-                <Text style={styles.textStyle}>Exit instruction</Text>
-              </Pressable>
+                onPress={() => setMedModalVisible(false)}>
+                    <Text style={styles.textStyle}>Close instruction</Text>
+                </Pressable>
+            </View>
           </View>
         </Modal>)
   };
@@ -120,10 +121,9 @@ const App = () => {
     setMedsMatrix(matCopy);
   };
   const expandInstruction = (med) => {
-    console.log(med.description)
-    return(
-        getMedModal(med.description)
-    )
+    // console.log(med.description);
+    setDisplayInstruction(med.description);
+    setMedModalVisible(true);
   };
   const renderMedList = (item,index) => {
     // index: morning/lunch/evening
@@ -135,7 +135,7 @@ const App = () => {
         return(
             <View style = {styles.eachmed}>
                 <TouchableOpacity 
-                    style = {[styles.square, medsMatrix[index][medIdx]==1 ? styles.itemSelected : null]}
+                    style = {[styles.square, medsMatrix[index][medIdx]==1 ? null:styles.itemSelected]}
                     onPress = {()=>checkItem(index,medIdx)}
                 >
                 </TouchableOpacity>
@@ -176,15 +176,37 @@ const App = () => {
             }
             )
         }
-        {
-            getMedModal('helo')
-        }
       </View>
+        {
+            getMedModal()
+        }
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+    textDescription:{
+        fontSize: 20,
+        paddingVertical: 20,
+    },
+    medDescription:{
+        marginTop: 100,
+        justifyContent:'center',
+        textAlign:'center',
+        backgroundColor: '#ebebeb',
+        borderRadius: 20,
+        width: '80%',
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
     todoFrame:{
         marginVertical: 20,
         width: '80%',
@@ -252,7 +274,7 @@ const styles = StyleSheet.create({
     square:{
         width: 24,
         height: 24,
-        backgroundColor: '#55bcf6',
+        backgroundColor: '#e0e0e0',
         opacity: 0.4,
         borderRadius: 5,
         marginRight: 15,
