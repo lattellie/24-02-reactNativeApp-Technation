@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Task from './components/Tasks';
+import Task from '../components/Tasks';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 
