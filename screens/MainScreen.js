@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity} from 'react-native';
+import {Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView,TouchableOpacity} from 'react-native';
 import Checkbox from '../components/Checkbox';
 import MedToDo from '../components/MedToDo';
 const MainScreen = () => {
@@ -35,11 +35,34 @@ const MainScreen = () => {
     description: 'this is the description for medicine D.',
     selected: -1,
   }
-  
+  const med5 = {
+    name: 'Medicine E',
+    often: [0,1,1],
+    exp: [2024,3,10],
+    description: 'this is the description for medicine E.',
+    selected: -1,
+  }
+  const med6 = {
+    name: 'Medicine F',
+    often: [1,1,0],
+    exp: [2024,3,19],
+    description: 'this is the description for medicine F.',
+    selected: -1,
+  }
+  const med7 = {
+    name: 'Medicine G',
+    often: [1,0,0],
+    exp: [2024,3,19],
+    description: 'this is the description for medicine G.',
+    selected: -1,
+  }
+  const userName = 'Mary';
+  const userName1 = 'John';
+  const [user, setUser] = useState({name:userName1, med:[med1, med2, med3, med4,med5]});
+
   const [medsMatrix, setMedsMatrix] = useState(Array.from({ length: 3 }, () => Array(4).fill(0)));
   const timeFrameList = ['morning','lunch','evening'];
   const [medList, setMedList] = useState([med1, med2, med3, med4]);
-  const userName = 'John';
   const changeselect = (index) => {
     let medCopy = [...medList];
     medCopy[index] = { ... medCopy[index],selected:-medCopy[index].selected};
@@ -162,7 +185,7 @@ const MainScreen = () => {
         onPress={() => setModalVisible(true)}>
         <Text style={styles.textStyle}>Preference Setting</Text>
       </Pressable>
-      <View style={styles.todoFrame}>
+      <ScrollView style={styles.todoFrame}>
         {
             timeFrameList.map((item,index) => {
                 return(
@@ -176,7 +199,7 @@ const MainScreen = () => {
             }
             )
         }
-      </View>
+      </ScrollView>
         {
             getMedModal()
         }
@@ -233,6 +256,7 @@ const styles = StyleSheet.create({
         justifyContent: 'top',
         alignItems: 'center',
         marginTop: 100,
+        
     },
     modalView: {
         // margin: 20,
