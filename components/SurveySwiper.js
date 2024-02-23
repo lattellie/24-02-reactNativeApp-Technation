@@ -25,15 +25,14 @@ const questions = [
     },
   ];
 
-const QuestionOption = ({ label, onPress, isSelected }) => (
-    <TouchableOpacity style={styles.option} onPress={onPress} activeOpacity={0.7}>
-      <View style={styles.checkbox}>
+  const QuestionOption = ({ label, onPress, isSelected }) => (
+    <TouchableOpacity style={[styles.option, isSelected && styles.optionSelected]} onPress={onPress} activeOpacity={0.7}>
+      <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}>
         {isSelected && <View style={styles.selectedCheckbox} />}
       </View>
       <Text style={[styles.optionText, isSelected && styles.selectedOptionText]}>
         {label}
       </Text>
-    
     </TouchableOpacity>
   );
 
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
   option: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderWidth: 2,
@@ -106,12 +105,20 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginBottom: 10,
     width: '100%',
+    backgroundColor: '#fff', // default background color
+  },
+  optionSelected: {
+    backgroundColor:  '#000080', // background color when selected
+    borderColor:  '#000080', // border color when selected
   },
   optionText: {
     fontSize: 18,
+    color: '#000', // default text color
+    marginHorizontal: 10,
+    paddingRight: 10,
   },
   selectedOptionText: {
-    fontWeight: 'bold',
+    color: '#fff', // text color when selected
   },
   checkbox: {
     width: 24,
@@ -121,12 +128,16 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 10,
+  },
+  checkboxSelected: {
+    borderColor: '#fff', // checkbox border color when selected
   },
   selectedCheckbox: {
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#000',
+    backgroundColor: '#fff', // checkbox inner color when selected
   },
   dot: {
     backgroundColor: 'rgba(0, 0, 0, .2)',
@@ -147,7 +158,7 @@ const styles = StyleSheet.create({
   paginationStyle: {
     position: 'absolute',
     bottom: 10,
-    right: 10,
+    left: 10,
   },
   // Add other styles as needed
 });
