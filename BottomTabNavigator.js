@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 // Create a bottom tab navigator instance
 const Tab = createBottomTabNavigator();
-
 function BottomTabNavigator() {
   return (
     // Define the navigator container
@@ -37,7 +36,7 @@ function BottomTabNavigator() {
   >
       {/* Define each tab with its screen component */}
       <Tab.Screen name="HomeStack" component={HomeStackNavigator} />
-      <Tab.Screen name="Todo" component={TodoScreen} />
+      <Tab.Screen name="Todo" component={TodoScreen2} />
       <Tab.Screen name="Profile" component={JohnScreen} />
       {/* Add more screens as needed */}
     </Tab.Navigator>
