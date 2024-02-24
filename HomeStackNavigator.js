@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
+import SurveySwiper from './components/SurveySwiper';
 
 const Stack = createStackNavigator();
 
@@ -10,6 +11,7 @@ function HomeStackNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Details" component={DetailScreen} />
+      <Stack.Screen name="Survey" component={SurveySwiper} />
     </Stack.Navigator>
   );
 }
