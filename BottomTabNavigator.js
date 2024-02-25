@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DetailScreen from './screens/DetailScreen';
 import TodoScreen from './screens/MainScreen';
-//import TodoScreen2 from './screens/MainScreen2';
+import TodoScreen2 from './screens/MainScreen2';
 import HomeStackNavigator from './HomeStackNavigator'; 
 import JohnScreen from './screens/JohnProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,7 +36,7 @@ function BottomTabNavigator() {
   >
       {/* Define each tab with its screen component */}
       <Tab.Screen name="HomeStack" component={HomeStackNavigator} />
-      <Tab.Screen name="Todo" component={TodoScreen2} />
+      <Tab.Screen name="Todo" component={TodoScreen} />
       <Tab.Screen name="Profile" component={JohnScreen} />
       {/* Add more screens as needed */}
     </Tab.Navigator>

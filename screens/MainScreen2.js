@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView,TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, ScrollView} from 'react-native';
 import Checkbox from '../components/Checkbox';
+import MedToDo from '../components/MedToDo';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {saveDataToFile,loadDataFromFile} from '../components/manageData';
-
-const MainScreen = () => {
+const MainScreen2 = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [displayInstruction, setDisplayInstruction] = useState('');
   const [medModalVisible, setMedModalVisible] = useState(false);
@@ -24,66 +24,30 @@ const MainScreen = () => {
     selected: -1,
   }
   const med3 = {
-    name: 'Medicine C',
-    often: [1,0,1],
-    exp: [2024,3,10],
-    description: 'this is the description for medicine C.',
-    selected: -1,
-  }
-  const med4 = {
-    name: 'Medicine D',
-    often: [0,0,1],
-    exp: [2024,3,19],
-    description: 'this is the description for medicine D.',
-    selected: -1,
-  }
-  const med5 = {
     name: 'Medicine E',
     often: [0,1,1],
     exp: [2024,3,10],
     description: 'this is the description for medicine E.',
     selected: -1,
   }
-  const med6 = {
+  const med4 = {
     name: 'Medicine F',
     often: [1,1,0],
     exp: [2024,3,19],
     description: 'this is the description for medicine F.',
     selected: -1,
   }
-  const med7 = {
+  const med5 = {
     name: 'Medicine G',
     often: [1,0,0],
     exp: [2024,3,19],
     description: 'this is the description for medicine G.',
     selected: -1,
   }
-  const userName1 = 'Mary';
-  const userName = 'John';
+  const userName = 'Mary';
   const timeFrameList = ['morning','lunch','evening'];
-  
-  const [medList, setMedList] = useState([med1, med2, med3, med4,med5])
+  const [medList, setMedList] = useState([med1, med2, med3, med4,med5]);
   const [medsMatrix, setMedsMatrix] = useState(Array.from({ length: 3 }, () => Array(medList.length).fill(0)));
-
-  useEffect(() => {
-    
-    const fetchData = async () => {
-      try {
-          await saveDataToFile('medmatrix',medsMatrix);
-          await saveDataToFile('timeframe',timeFrameList);
-          await saveDataToFile('medlist',medList);
-      } catch (error) {
-          console.error('Error occurred:', error);
-      }
-    };
-    if (medsMatrix !== null) {
-      fetchData();
-      // saveDataToFile('medMatrix',medsMatrix);
-      // saveDataToFile(field1,datatosave);
-      // loadDataFromFile('medMatrix');
-    }
-  }, [medsMatrix]);
-
   const changeselect = (index) => {
     let medCopy = [...medList];
     medCopy[index] = { ... medCopy[index],selected:-medCopy[index].selected};
@@ -98,12 +62,12 @@ const MainScreen = () => {
             row[index] = 0;
         })
     }
-
     setMedsMatrix(matCopy);
     // [[1, 1, 1, 0], [0, 1, 0, 0], [0, 1, 1, 0]]: morning ABC, lunch B, night BC
     // index: morning/ lunch/ evening
     // medIdx: medA/ medB/ medC/ medD
   }
+
   const getModal = () => {
     return (
         <Modal
@@ -181,13 +145,12 @@ const MainScreen = () => {
                 <TouchableOpacity
                     style = {[styles.square, medsMatrix[index][medIdx]==1 ? null:styles.itemSelected]}
                     onPress = {()=>checkItem(index,medIdx)}
-                    key = {medIdx*3+index}
+                    key = {medIdx*medList.length+medIdx}
                 >
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style = {styles.textInstruction} 
                     onPress={()=>expandInstruction(med)}
-                    key = {medIdx*3+index+medIdx.length*3}
                 >
                     <Text>{med.name}</Text>
                 </TouchableOpacity>
@@ -349,4 +312,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MainScreen;
+export default MainScreen2;
