@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { Button, View, Text } from 'react-native';
-import {saveDataToFile,loadDataFromFile} from '../components/manageData';
+import {saveDataToFile,loadDataFromFile,clearData} from '../components/manageData';
 import * as Notifications from 'expo-notifications';
 import { sendPushNotification,registerForPushNotificationsAsync } from '../components/setNot';
 
@@ -53,7 +53,7 @@ function HomeScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (!notificationSent && (currentDateTime.getSeconds()%10) === 0) {
+    if (!notificationSent && (currentDateTime.getSeconds()%60) === 0) {
       // console.log('Sending push notification');
       sendPushNotification(expoPushToken);
       setNotificationSent(true); // Set notificationSent flag to true after sending the notification
@@ -74,7 +74,18 @@ function HomeScreen({ navigation }) {
       />
       <Button
       title="update data"
-      onPress={() => setMedsMatrix()}
+      onPress={() => {
+        console.log('pressed-in-onpress')
+        sendPushNotification(expoPushToken);
+        console.log(expoPushToken)
+      }}
+      />
+      <Button
+      title="clear data"
+      onPress={() => {
+        clearData();
+        console.log('cleared data!');
+      }}
       />
       <Text >{currentDateTime.toLocaleString()}</Text>
     </View>

@@ -72,15 +72,13 @@ const MainScreen = () => {
           await saveDataToFile('medmatrix',medsMatrix);
           await saveDataToFile('timeframe',timeFrameList);
           await saveDataToFile('medlist',medList);
+          console.log('finished saving all data');
       } catch (error) {
           console.error('Error occurred:', error);
       }
     };
     if (medsMatrix !== null) {
       fetchData();
-      // saveDataToFile('medMatrix',medsMatrix);
-      // saveDataToFile(field1,datatosave);
-      // loadDataFromFile('medMatrix');
     }
   }, [medsMatrix]);
 
