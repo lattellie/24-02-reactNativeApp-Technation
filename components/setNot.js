@@ -34,6 +34,11 @@ export async function sendPushNotification(expoPushToken) {
   // console.log(timeframe);
   let displayNot = false;
   let todisplay = 'Hey John! remember to take your '+timeframe[d]+' medicines:';
+  const nm = await loadDataFromFile('name');
+  if (nm=='Carer') {
+    todisplay = 'Remind John to take his '+timeframe[d]+' medicines:';
+  }
+  console.log(nm);
   // (const [index, item] of list.entries()
   for (const [idx, currMed] of data[d].entries()) {
     if (currMed===1 || currMed) {

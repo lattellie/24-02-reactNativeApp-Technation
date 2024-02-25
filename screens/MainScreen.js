@@ -73,7 +73,6 @@ const MainScreen = () => {
   const [medsMatrix, setMedsMatrix] = useState(Array.from({ length: 3 }, () => Array(medList.length).fill(0)));
 
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
           await saveDataToFile('medmatrix',medsMatrix);
@@ -88,6 +87,20 @@ const MainScreen = () => {
       fetchData();
     }
   }, [medsMatrix]);
+
+  useEffect(()=>{
+    const saveName = async () => {
+      try {
+          await saveDataToFile('name',userName);
+          console.log('finished saving all data');
+      } catch (error) {
+          console.error('Error occurred:', error);
+      }
+    };
+    if (userName !== null) {
+      saveName();
+    }
+  },[])
 
   const changeselect = (index) => {
     let medCopy = [...medList];
@@ -185,7 +198,12 @@ const MainScreen = () => {
             <View style = {[styles.eachmed,medsMatrix[index][medIdx]==1 ? null:styles.eachmedSelected]}>
                 <TouchableOpacity
                     style = {[styles.square, medsMatrix[index][medIdx]==1 ? null:styles.itemSelected]}
-                    onPress = {()=>checkItem(index,medIdx)}
+                    onPress={async () => {
+                      const nm = await loadDataFromFile('name');
+                      if (nm != 'Carer') {
+                        checkItem(index, medIdx);
+                      }
+                    }}
                     key = {medIdx*3+index}
                 >
                 </TouchableOpacity>

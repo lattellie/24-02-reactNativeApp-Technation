@@ -62,9 +62,40 @@ function HomeScreen({ navigation }) {
     }
   }, [currentDateTime, notificationSent]);
 
+  const switchToCarer = () => {
+    bgImage = require('../assets/bgLight.png');
+    saveDataToFile('name','Carer');
+  }
+  async function loadBgImage() {
+    try {
+      const nm = await loadDataFromFile('name');
+      if (nm != 'Carer') {
+        return require('../assets/bgDark.png');
+      } else {
+        return require('../assets/bgLight.png');
+      }
+    } catch (error) {
+      console.error('Error loading data:', error);
+      return null;
+    }
+  }
+  const [bgImage, setBgImage] = useState(null);
+
+  useEffect(() => {
+    const fetchBgImage = async () => {
+      try {
+        const image = await loadBgImage();
+        setBgImage(image);
+      } catch (error) {
+        console.error('Error loading background image:', error);
+      }
+    };
+
+    fetchBgImage();
+  }, []);
   return (
     <ImageBackground 
-      source={require('../assets/bgDark.png')}
+      source={bgImage}
       style={styles.background}
     >
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -80,7 +111,7 @@ function HomeScreen({ navigation }) {
       </TouchableOpacity>
       
       <TouchableOpacity style={styles.button}
-      // onPress={() => navigation.navigate('Survey')}
+      onPress={() => switchToCarer()}
       >
         <Text style={styles.buttontext}>Switch to carer mode</Text>
       </TouchableOpacity>
