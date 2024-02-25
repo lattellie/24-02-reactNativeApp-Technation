@@ -10,38 +10,38 @@ const MainScreen = () => {
   const [medModalVisible, setMedModalVisible] = useState(false);
   // setting up all the medicines in the list
   const med1 = {
-    name: 'Medicine A',
-    often: [1,0,0],
+    name: 'Throne 100mg/tab',
+    often: [1,0,1],
     exp: [2024,3,15],
-    description: 'this is the description for medicine A.',
+    description: 'Indications: Blood circulation disorders\n\nCommon Side effects: Erubescent, Edema, Nausea, Vomiting, Palpitation, Allergy',
     selected: -1,
   }
   const med2 = {
-    name: 'Medicine B',
-    often: [1,1,1],
+    name: 'Destone 540mg/tab',
+    often: [1,0,1],
     exp: [2024,3,1],
-    description: 'this is the description for medicine B.',
+    description: 'Indications: kidney stones\n\nCommon side effects: gastrointestinal upset\n\nPrecaution: use with caution when co-administering with triamterene, spironolactone, amiloride',
     selected: -1,
   }
   const med3 = {
-    name: 'Medicine C',
-    often: [1,0,1],
+    name: 'Through(Sennoside) 20mg/tab',
+    often: [0,0,1],
     exp: [2024,3,10],
-    description: 'this is the description for medicine C.',
+    description: 'Indications: Constipation\n\nCommon side effects: abdominal pain, diarrhea, nausea',
     selected: -1,
   }
   const med4 = {
-    name: 'Medicine D',
-    often: [0,0,1],
+    name: 'Famotidine 20mg/tab',
+    often: [0,1,0],
     exp: [2024,3,19],
-    description: 'this is the description for medicine D.',
+    description: 'Indications: peptic ulcer\n\nCommon side effects: constipation, diarrhea, nausea, vomiting, skin rash',
     selected: -1,
   }
   const med5 = {
-    name: 'Medicine E',
-    often: [0,1,1],
+    name: 'Trajenta 5mg/tab',
+    often: [0,1,0],
     exp: [2024,3,10],
-    description: 'this is the description for medicine E.',
+    description: 'Indications: antidiabetic agent\n\nCommon side effects: nasopharyngitis, Arthralgia, Back pain, Headache\n\nPrecaution: eat sugar if symptoms of hypoglycemia occur',
     selected: -1,
   }
   const med6 = {
@@ -52,10 +52,17 @@ const MainScreen = () => {
     selected: -1,
   }
   const med7 = {
-    name: 'Medicine G',
+    name: 'Xanax 0.25mg/tab',
     often: [1,0,0],
     exp: [2024,3,19],
-    description: 'this is the description for medicine G.',
+    description: 'Indications: Antianxiety agent\n\nCommon side effect: Drowsiness, increased appetite, weight change, constipation',
+    selected: -1,
+  }
+  const med8 = {
+    name: 'Furide 40mg/tab',
+    often: [1,0,0],
+    exp: [2024,3,19],
+    description: 'Indications: Antihypertensive\n\nCommon side effect: hyperuricemia, electrolyte imbalance, change in appetite, orthostatic hypotension\n\nPrecautions: take this medication with food if you have an upset stomach',
     selected: -1,
   }
   const userName1 = 'Mary';
@@ -300,10 +307,10 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     buttonOpen: {
-        backgroundColor: '#F194FF',
+        backgroundColor: '#000080',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#000080',
     },
     textStyle: {
         color: 'white',
@@ -324,7 +331,7 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
     itemSelected:{
-        backgroundColor: '#000',
+        backgroundColor: '#000080',
     },
     textInstruction:{
         width: '90%',
@@ -341,7 +348,7 @@ const styles = StyleSheet.create({
     },
     eachmedSelected:{
       opacity:0.3,
-      backgroundColor:'#b4b4b4',
+      backgroundColor:'#000080',
       height:25,
       padding:0
     }

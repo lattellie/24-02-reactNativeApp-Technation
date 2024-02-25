@@ -8,12 +8,15 @@ const Stack = createStackNavigator();
 
 function HomeStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false, // Optional: Hide the header if not needed
+    }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Details" component={DetailScreen} />
       <Stack.Screen name="Survey" component={SurveySwiper} />
     </Stack.Navigator>
   );
 }
-
+// { backgroundColor: 'transparent' }
 export default HomeStackNavigator;

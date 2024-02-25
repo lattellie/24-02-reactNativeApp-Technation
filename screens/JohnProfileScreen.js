@@ -34,10 +34,10 @@ const ProfileScreen = () => {
         <Text style={styles.value}>Alex White</Text>
       </View>
       
-      <TouchableOpacity style={styles.button}>
+      {/* <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>button</Text>
       </TouchableOpacity>
-      
+       */}
       {/* The bottom tab bar would be rendered by your navigation library,
            so it's not included in this component. */}
     </ScrollView>

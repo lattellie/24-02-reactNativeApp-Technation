@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { Button, View, Text } from 'react-native';
+import { ImageBackground,StyleSheet,Button, View, Text } from 'react-native';
 import {saveDataToFile,loadDataFromFile,clearData} from '../components/manageData';
 import * as Notifications from 'expo-notifications';
 import { sendPushNotification,registerForPushNotificationsAsync } from '../components/setNot';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -62,34 +63,53 @@ function HomeScreen({ navigation }) {
   }, [currentDateTime, notificationSent]);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+    <ImageBackground 
+      source={require('../assets/bgDark.png')}
+      style={styles.background}
+    >
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={styles.title}>Welcome back!</Text>
       {/* <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       /> */}
-      <Button
-      title="Take the Survey"
+      <TouchableOpacity style={styles.button}
       onPress={() => navigation.navigate('Survey')}
-      />
-      <Button
-      title="update data"
-      onPress={() => {
-        console.log('pressed-in-onpress')
-        sendPushNotification(expoPushToken);
-        console.log(expoPushToken)
-      }}
-      />
-      <Button
-      title="clear data"
-      onPress={() => {
-        clearData();
-        console.log('cleared data!');
-      }}
-      />
-      <Text >{currentDateTime.toLocaleString()}</Text>
+      >
+        <Text style={styles.buttontext}>Take the daily Survey</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style={styles.button}
+      // onPress={() => navigation.navigate('Survey')}
+      >
+        <Text style={styles.buttontext}>Switch to carer mode</Text>
+      </TouchableOpacity>
     </View>
+    </ImageBackground>
+    
   );
 }
 
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch' or 'contain'
+    justifyContent: 'center',
+  },
+  title:{
+    fontSize: 40,
+    color: '#fff',
+    fontWeight:'500',
+  },
+  button:{
+    padding: 10,
+    borderRadius: 25,
+    marginTop: 20,
+    backgroundColor:'#fff',
+  },
+  buttontext:{
+    fontSize: 20,
+    color: '#000080',
+  }
+})
 export default HomeScreen;

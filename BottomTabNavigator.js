@@ -6,6 +6,7 @@ import TodoScreen2 from './screens/MainScreen2';
 import HomeStackNavigator from './HomeStackNavigator'; 
 import JohnScreen from './screens/JohnProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
+import { View, StyleSheet } from 'react-native';
 
 // Create a bottom tab navigator instance
 const Tab = createBottomTabNavigator();
@@ -28,19 +29,26 @@ function BottomTabNavigator() {
         // You can return any component that you like here!
         return <Ionicons name={iconName} size={size} color={color} />;
       },
+      tabBarActiveBackgroundColor:'#000080',
+      tabBarInactiveBackgroundColor:'#fff',
     })}
     tabBarOptions={{
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#fff',
+      // 'tomato',
+      inactiveTintColor: '#000080',
     }}
   >
       {/* Define each tab with its screen component */}
-      <Tab.Screen name="HomeStack" component={HomeStackNavigator} />
+      <Tab.Screen name="HomeStack" component={HomeStackNavigator} style={styles.background}/>
       <Tab.Screen name="Todo" component={TodoScreen} />
       <Tab.Screen name="Profile" component={JohnScreen} />
       {/* Add more screens as needed */}
     </Tab.Navigator>
   );
 }
-
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: '#000080',
+  }
+})
 export default BottomTabNavigator;
