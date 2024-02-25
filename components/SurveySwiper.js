@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import {Image, StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import Swiper from 'react-native-swiper';
 
 const questions = [
@@ -45,7 +45,7 @@ const SurveyScreen = () => {
       [questionIndex]: option,
     }));
   };
-
+  let nextidx = questions.length;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Swiper
@@ -56,7 +56,7 @@ const SurveyScreen = () => {
         activeDot={<View style={styles.activeDot} />}
         paginationStyle={styles.paginationStyle}
       >
-        {questions.map((item, index) => (
+        {/* {questions.map((item, index) => (
           <View key={index} style={styles.slide}>
             <Text style={styles.questionCount}>Question {index + 1}</Text>
             <Text style={styles.question}>{item.question}</Text>
@@ -67,9 +67,50 @@ const SurveyScreen = () => {
                 onPress={() => selectOption(index, option)}
                 isSelected={selectedAnswers[index] === option}
               />
-            ))}
+            ))
+            }
           </View>
-        ))}
+        ))} */}
+        <View key={0} style={styles.slide}>
+            <Text style={styles.questionCount}>Question {0 + 1}</Text>
+            <Text style={styles.question}>{questions[0].question}</Text>
+            {questions[0].options.map((option, optionIndex) => (
+              <QuestionOption
+                key={optionIndex}
+                label={option}
+                onPress={() => selectOption(1, option)}
+                isSelected={selectedAnswers[1] === option}
+              />
+            ))
+            }
+        </View>
+        <View key={1} style={styles.slide}>
+            <Text style={styles.questionCount}>Question {1 + 1}</Text>
+            <Text style={styles.question}>{questions[1].question}</Text>
+            {questions[1].options.map((option, optionIndex) => (
+              <QuestionOption
+                key={optionIndex}
+                label={option}
+                onPress={() => selectOption(1, option)}
+                isSelected={selectedAnswers[1] === option}
+              />
+            ))
+            }
+        </View>
+        <View key={nextidx+3} style={styles.slide}>
+          <Text style={styles.result}>Question: {questions[0].question}</Text>
+          <Text style={styles.resultSub}>36% of patients has similar symptoms</Text>
+          <Image
+            source={require('../assets/q1.png')} // Replace with your image path
+            style={styles.image}
+          />
+          <Text style={styles.result}>Question: {questions[1].question}</Text>
+          <Text style={styles.resultSub}>20% of patients has similar symptoms</Text>
+          <Image
+            source={require('../assets/q2.png')} // Replace with your image path
+            style={styles.image}
+          />
+        </View>
       </Swiper>
     </SafeAreaView>
   );
@@ -78,6 +119,21 @@ const SurveyScreen = () => {
 
 const styles = StyleSheet.create({
   wrapper: {},
+  result:{
+    marginVertical: 10,
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  resultSub:{
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  image: {
+    width: 400, 
+    height: 200,
+    resizeMode: 'contain', 
+  },
   slide: {
     flex: 1,
     justifyContent: 'center',
