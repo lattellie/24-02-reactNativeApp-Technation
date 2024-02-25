@@ -2,15 +2,6 @@ import * as FileSystem from 'expo-file-system';
 
 const DATA_FILE_URI = `${FileSystem.documentDirectory}state.json`;
 
-// export const saveDataToFile = async (data) => {
-//   try {
-//     await FileSystem.writeAsStringAsync(DATA_FILE_URI, JSON.stringify(data));
-//     console.log(DATA_FILE_URI)
-//     console.log('Data saved successfully');
-//   } catch (error) {
-//     console.error('Error saving data:', error);
-//   }
-// };
 
 export const saveDataToFile = async (field,data) => {
     try {
