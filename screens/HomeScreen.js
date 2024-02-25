@@ -62,59 +62,44 @@ function HomeScreen({ navigation }) {
     }
   }, [currentDateTime, notificationSent]);
 
+  const [bgImage, setBgImage] = useState(require('../assets/bgDark.png'));
+  const [carer, setcarer] = useState(false);
   const switchToCarer = () => {
-    bgImage = require('../assets/bgLight.png');
+    setBgImage(require('../assets/bgLight.png'));
     saveDataToFile('name','Carer');
+    setcarer(true);
   }
-  async function loadBgImage() {
-    try {
-      const nm = await loadDataFromFile('name');
-      if (nm != 'Carer') {
-        return require('../assets/bgDark.png');
-      } else {
-        return require('../assets/bgLight.png');
-      }
-    } catch (error) {
-      console.error('Error loading data:', error);
-      return null;
-    }
+  const switchToPatient = () => {
+    setBgImage(require('../assets/bgDark.png'));
+    saveDataToFile('name','John');
+    setcarer(false);
   }
-  const [bgImage, setBgImage] = useState(null);
-
-  useEffect(() => {
-    const fetchBgImage = async () => {
-      try {
-        const image = await loadBgImage();
-        setBgImage(image);
-      } catch (error) {
-        console.error('Error loading background image:', error);
-      }
-    };
-
-    fetchBgImage();
-  }, []);
   return (
     <ImageBackground 
       source={bgImage}
       style={styles.background}
     >
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      
+      <Text style={styles.text}>{currentDateTime.toLocaleTimeString()}</Text>
       <Text style={styles.title}>Welcome back!</Text>
-      {/* <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      /> */}
-      <TouchableOpacity style={styles.button}
+      {!carer && <TouchableOpacity style={styles.button}
       onPress={() => navigation.navigate('Survey')}
       >
         <Text style={styles.buttontext}>Take the daily Survey</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity style={styles.button}
+      </TouchableOpacity>}
+      {!carer && <TouchableOpacity style={styles.button}
       onPress={() => switchToCarer()}
       >
         <Text style={styles.buttontext}>Switch to carer mode</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
+      {carer && <TouchableOpacity style={styles.button}
+      onPress={() => switchToPatient()}
+      >
+        <Text style={styles.buttontext}>Switch to patient mode</Text>
+      </TouchableOpacity>}
+
+      
     </View>
     </ImageBackground>
     
@@ -141,6 +126,10 @@ const styles = StyleSheet.create({
   buttontext:{
     fontSize: 20,
     color: '#000080',
+  },
+  text:{
+    color: '#fff',
+    fontSize: 20,
   }
 })
 export default HomeScreen;
